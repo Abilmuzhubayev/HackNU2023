@@ -17,6 +17,8 @@ public class Supply {
 
     private Long price;
 
+    private Long quantity;
+
     @Column(name = "supply_time")
     private Timestamp time;
 }

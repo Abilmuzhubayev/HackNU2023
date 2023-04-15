@@ -17,6 +17,8 @@ public class Sale {
 
     private Long price;
 
+    private Long quantity;
+
     @Column(name = "sale_time")
     private Timestamp time;
 }
