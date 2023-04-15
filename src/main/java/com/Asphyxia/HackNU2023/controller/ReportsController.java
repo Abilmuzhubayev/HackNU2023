@@ -28,11 +28,12 @@ public class ReportsController {
                                 @RequestParam(name = "toTime") String toTime) {
 
         ReportDto result = null;
-        try {
-            result = reportService.generateReport(barcode, fromTime, toTime);
-        } catch (ParseException e) {
-            log.error("ParseException in generateReport: ", e);
-        }
+        result = reportService.generateFastReport(barcode, fromTime, toTime);
+//        try {
+//            result = reportService.generateReport(barcode, fromTime, toTime);
+//        } catch (ParseException e) {
+//            log.error("ParseException in generateReport: ", e);
+//        }
 
         return result;
     }

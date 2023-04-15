@@ -24,4 +24,13 @@ public class SupplyDaoI implements SupplyDao {
         return (List<Supply>) query.getResultList();
     }
 
+    @Override
+    public List<Supply> getSuppliesFromTime(BigInteger barcode, String from) {
+        String sql = "select * from supply where barcode = ?1 and supply_time >= ?2 order by supply_time ASC";
+        Query query = em.createNativeQuery(sql, Supply.class);
+        query.setParameter(1, barcode);
+        query.setParameter(2, from);
+        return (List<Supply>) query.getResultList();
+    }
+
 }

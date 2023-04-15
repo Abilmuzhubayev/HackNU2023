@@ -11,4 +11,7 @@ import java.util.List;
 public interface SaleDao {
 
     List<Sale> getSalesByPeriod(BigInteger barcode, String to);
+
+    List<Sale> getSalesFromTime(BigInteger barcode, String from);
+
 }

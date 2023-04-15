@@ -10,5 +10,8 @@ import java.util.List;
 public interface SupplyDao {
 
     List<Supply> getSuppliesByPeriod(BigInteger barcode, String to);
+
+    List<Supply> getSuppliesFromTime(BigInteger barcode, String from);
+
 }
 

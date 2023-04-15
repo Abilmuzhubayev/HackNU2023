@@ -1,8 +1,11 @@
 package com.Asphyxia.HackNU2023.service;
 
+import com.Asphyxia.HackNU2023.dao.PrefixSumsByDateDao;
+import com.Asphyxia.HackNU2023.dao.PrefixSumsByDateDaoI;
 import com.Asphyxia.HackNU2023.dao.SaleDao;
 import com.Asphyxia.HackNU2023.dao.SupplyDao;
 import com.Asphyxia.HackNU2023.dto.ReportDto;
+import com.Asphyxia.HackNU2023.entity.PrefixSumsByDate;
 import com.Asphyxia.HackNU2023.entity.Sale;
 import com.Asphyxia.HackNU2023.entity.Supply;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,8 @@ public class ReportService {
     private SaleDao saleDao;
     @Autowired
     private SupplyDao supplyDao;
+    @Autowired
+    private PrefixSumsByDateDao prefixSumsSalesDao;
 
     @Transactional
     public ReportDto generateReport(BigInteger barcode, String from, String to) throws ParseException {
@@ -70,6 +75,19 @@ public class ReportService {
         }
 
         return new ReportDto(barcode, quantity, revenue, netProfit);
+    }
+
+    @Transactional
+    public ReportDto generateFastReport(BigInteger barcode, String from, String to) {
+
+        PrefixSumsByDate lastSale = prefixSumsSalesDao.getLastByDate(to, barcode, false);
+        PrefixSumsByDate saleBefore = prefixSumsSalesDao.getLastByDate(from, barcode, true);
+
+        long quantity = lastSale.getQuantitySum() - (saleBefore != null ? saleBefore.getQuantitySum() : 0);
+        long revenue = lastSale.getRevenueSum() - (saleBefore != null ? saleBefore.getRevenueSum() : 0);
+        long netProfit = lastSale.getNetProfitSum() - (saleBefore != null ? saleBefore.getNetProfitSum() : 0);
+        return new ReportDto(barcode, quantity, revenue, netProfit);
+
     }
 
 }

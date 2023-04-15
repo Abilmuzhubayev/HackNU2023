@@ -18,10 +18,20 @@ public class SaleDaoI implements SaleDao {
 
     @Override
     public List<Sale> getSalesByPeriod(BigInteger barcode, String to) {
-        String sql = "select * from sale where barcode = ?1 and (sale_time <= ?2) order by sale_time ASC";
+        String sql = "select * from sale where barcode = ?1 and sale_time <= ?2 order by sale_time ASC";
         Query query = em.createNativeQuery(sql, Sale.class);
         query.setParameter(1, barcode);
         query.setParameter(2, to);
         return (List<Sale>) query.getResultList();
     }
+
+    @Override
+    public List<Sale> getSalesFromTime(BigInteger barcode, String from) {
+        String sql = "select * from sale where barcode = ?1 and sale_time >= ?2 order by sale_time ASC";
+        Query query = em.createNativeQuery(sql, Sale.class);
+        query.setParameter(1, barcode);
+        query.setParameter(2, from);
+        return (List<Sale>) query.getResultList();
+    }
+
 }
