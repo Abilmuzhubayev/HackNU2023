@@ -3,6 +3,7 @@ package com.Asphyxia.HackNU2023.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @Entity
@@ -13,7 +14,7 @@ public class Supply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String barcode;
+    private BigInteger barcode;
 
     private Long price;
 
