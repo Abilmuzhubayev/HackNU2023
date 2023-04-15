@@ -34,8 +34,8 @@ public class ReportsController {
 //        } catch (ParseException e) {
 //            log.error("ParseException in generateReport: ", e);
 //        }
-
         return result;
     }
+
 
  }

@@ -5,9 +5,11 @@ import com.Asphyxia.HackNU2023.entity.Sale;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
 
+@Repository
 public class PrefixSumsByDateDaoI implements PrefixSumsByDateDao {
 
     @Autowired
