@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "sale")
+@Table(name = "sale", schema = "umag_hacknu")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +17,6 @@ public class Sale {
 
     private Long price;
 
+    @Column(name = "sale_time")
     private Timestamp time;
 }
