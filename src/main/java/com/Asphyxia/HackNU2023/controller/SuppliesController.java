@@ -1,7 +1,6 @@
 package com.Asphyxia.HackNU2023.controller;
 
 import com.Asphyxia.HackNU2023.dto.CreateResponse;
-import com.Asphyxia.HackNU2023.dto.SaleDto;
 import com.Asphyxia.HackNU2023.dto.SupplyDto;
 import org.springframework.web.bind.annotation.*;
 
