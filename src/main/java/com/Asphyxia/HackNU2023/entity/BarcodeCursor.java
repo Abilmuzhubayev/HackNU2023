@@ -6,10 +6,10 @@ import lombok.Data;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-@Data
 @Entity
-@Table(name = "sale_to_supply_cursor")
-public class SaleToSupplyCursor {
+@Data
+@Table(name = "barcode_cursor")
+public class BarcodeCursor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,5 @@ public class SaleToSupplyCursor {
     private Timestamp supplyTime;
 
     private Long quantityUsed;
-
-    private Timestamp saleTime;
 
 }

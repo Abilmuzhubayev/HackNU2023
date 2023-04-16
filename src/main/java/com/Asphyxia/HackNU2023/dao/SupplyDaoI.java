@@ -34,11 +34,11 @@ public class SupplyDaoI implements SupplyDao {
 
     @Override
     public List<SupplyDto> getSuppliesByPeriod(BigInteger barcode, String from, String to) {
-        String sql = "select * from supply where barcode = ?1 and (supply_time between ?1 and ?2)";
+        String sql = "select * from supply where barcode = ?1 and (supply_time between ?2 and ?3)";
         Query query = em.createNativeQuery(sql, Supply.class);
         query.setParameter(1, barcode);
         query.setParameter(2, from);
-        query.setParameter(2, to);
+        query.setParameter(3, to);
         List<Supply> supplies = query.getResultList();
 
         List<SupplyDto> result = new ArrayList<>();

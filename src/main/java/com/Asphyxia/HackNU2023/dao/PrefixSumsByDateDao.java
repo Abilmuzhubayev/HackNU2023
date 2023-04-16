@@ -8,4 +8,10 @@ public interface PrefixSumsByDateDao {
 
     PrefixSumsByDate getLastByDate(String date, BigInteger barcode, Boolean isLess);
 
+    PrefixSumsByDate getByDate(String date, BigInteger barcode);
+
+    void set(PrefixSumsByDate prefixSumsByDate);
+
+    void delete(PrefixSumsByDate prefixSumsByDate);
+
 }

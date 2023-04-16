@@ -30,7 +30,25 @@ public class ReportsController {
         ReportDto result = null;
         result = reportService.generateFastReport(barcode, fromTime, toTime);
 //        try {
-//            result = reportService.generateReport(barcode, fromTime, toTime);
+//            ReportDto answer = reportService.generateSlowReport(barcode, fromTime, toTime);
+//
+//            Boolean error = false;
+//            if (!answer.getQuantity().equals(result.getQuantity())) {
+//                System.out.println("Quantity!\n" + answer.getQuantity() + " : " + result.getQuantity());
+//                error = true;
+//            }
+//            if (!answer.getRevenue().equals(result.getRevenue())) {
+//                System.out.println("Revenue!\n" + answer.getRevenue() + " : " + result.getRevenue());
+//                error = true;
+//            }
+//            if (!answer.getNetProfit().equals(result.getNetProfit())) {
+//                System.out.println("Net Profit!\n" + answer.getNetProfit() + " : " + result.getNetProfit());
+//                error = true;
+//            }
+//
+//            if (!error) {
+//                System.out.println("Success!\n");
+//            }
 //        } catch (ParseException e) {
 //            log.error("ParseException in generateReport: ", e);
 //        }
