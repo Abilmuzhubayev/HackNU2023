@@ -34,11 +34,32 @@ public class SupplyDaoI implements SupplyDao {
 
     @Override
     public List<SupplyDto> getSuppliesByPeriod(BigInteger barcode, String from, String to) {
-        String sql = "select * from supply where barcode = ?1 and (supply_time between ?2 and ?3)";
+        String sql = "";
+        if (barcode != null && from != null && to != null) {
+            sql = "select * from supply where barcode = ?1 and (supply_time between ?2 and ?3)";
+        } else if (barcode == null && from != null && to != null) {
+            sql = "select * from supply where supply_time between ?2 and ?3";
+        } else if (barcode == null && from != null && to == null) {
+            sql = "select * from supply where supply_time >= ?2";
+        } else if (barcode == null && from == null && to != null) {
+            sql = "select * from supply where supply_time <= ?3";
+        } else if (barcode != null && from != null && to == null) {
+            sql = "select * from supply where barcode = ?1 and supply_time >= ?2";
+        } else if (barcode != null && from == null && to == null) {
+            sql = "select * from supply where barcode = ?1";
+        } else if (barcode != null && from == null && to != null) {
+            sql = "select * from supply where barcode = ?1 and supply_time <= ?3";
+        } else if (barcode == null && from == null && to == null) {
+            sql = "select * from supply";
+        }
+
         Query query = em.createNativeQuery(sql, Supply.class);
-        query.setParameter(1, barcode);
-        query.setParameter(2, from);
-        query.setParameter(3, to);
+        if (barcode != null)
+            query.setParameter(1, barcode);
+        if (from != null)
+            query.setParameter(2, from);
+        if (to != null)
+            query.setParameter(3 ,to);
         List<Supply> supplies = query.getResultList();
 
         List<SupplyDto> result = new ArrayList<>();

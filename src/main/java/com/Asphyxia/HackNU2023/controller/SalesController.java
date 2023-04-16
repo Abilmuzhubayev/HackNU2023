@@ -18,9 +18,9 @@ public class SalesController {
 
 
     @GetMapping
-    private List<SaleDto> getSalesList(@RequestParam(value = "barcode", required = true) BigInteger barcode,
-                                       @RequestParam(value = "fromTime", required = true) String fromTime,
-                                       @RequestParam(value = "toTime", required = true) String toTime) {
+    private List<SaleDto> getSalesList(@RequestParam(value = "barcode", required = false) BigInteger barcode,
+                                       @RequestParam(value = "fromTime", required = false) String fromTime,
+                                       @RequestParam(value = "toTime", required = false) String toTime) {
         return saleService.getSalesByPeriod(barcode, fromTime, toTime);
     }
 
@@ -36,7 +36,7 @@ public class SalesController {
         return createResponse;
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     private void editSale(@PathVariable("id") Long id,
                           @RequestBody SaleDto saleDto) {
         saleDto.setId(id);

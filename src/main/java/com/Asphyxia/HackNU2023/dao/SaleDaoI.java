@@ -33,11 +33,33 @@ public class SaleDaoI implements SaleDao {
 
     @Override
     public List<SaleDto> getSalesByPeriod(BigInteger barcode, String from, String to) {
-        String sql = "select * from sale where barcode = ?1 and (sale_time between ?2 and ?3)";
+        String sql = "";
+        if (barcode != null && from != null && to != null) {
+            sql = "select * from sale where barcode = ?1 and (sale_time between ?2 and ?3)";
+        } else if (barcode == null && from != null && to != null) {
+            sql = "select * from sale where sale_time between ?2 and ?3";
+        } else if (barcode == null && from != null && to == null) {
+            sql = "select * from sale where sale_time >= ?2";
+        } else if (barcode == null && from == null && to != null) {
+            sql = "select * from sale where sale_time <= ?3";
+        } else if (barcode != null && from != null && to == null) {
+            sql = "select * from sale where barcode = ?1 and sale_time >= ?2";
+        } else if (barcode != null && from == null && to == null) {
+            sql = "select * from sale where barcode = ?1";
+        } else if (barcode != null && from == null && to != null) {
+            sql = "select * from sale where barcode = ?1 and sale_time <= ?3";
+        } else if (barcode == null && from == null && to == null) {
+            sql = "select * from sale";
+        }
+
         Query query = em.createNativeQuery(sql, Sale.class);
-        query.setParameter(1, barcode);
-        query.setParameter(2, from);
-        query.setParameter(3 ,to);
+        if (barcode != null)
+            query.setParameter(1, barcode);
+        if (from != null)
+            query.setParameter(2, from);
+        if (to != null)
+            query.setParameter(3 ,to);
+
         List<Sale> sales =  query.getResultList();
         List<SaleDto> result = new ArrayList<>();
         for (Sale sale : sales) {

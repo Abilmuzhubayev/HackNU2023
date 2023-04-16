@@ -56,7 +56,9 @@ public class SaleService {
         Timestamp newTime = Timestamp.valueOf(saleDto.getSaleTime());
         Timestamp oldTime;
 
-        SaleToSupplyCursor cursor = cursorsDao.getBySaleTime(saleDto.getBarcode(), saleDto.getSaleTime());
+        SaleDto oldSaleDto = saleDao.getSaleById(saleDto.getId());
+
+        SaleToSupplyCursor cursor = cursorsDao.getBySaleTime(saleDto.getBarcode(), oldSaleDto.getSaleTime());
         if (cursor == null)
             throw new IllegalStateException("There is no cursor for sale, but has to be");
         oldTime = cursor.getSaleTime();

@@ -108,12 +108,12 @@ public class ReportService {
         if (minSupplyTime != null && Timestamp.valueOf(supplyTime).compareTo(Timestamp.valueOf(minSupplyTime)) > 0)
             supplyTime = minSupplyTime;
 
-        System.out.println("recalculate():");
-        System.out.println("barcode: " + barcode);
-        System.out.println("saleTime: " + saleTime);
-        System.out.println("supplyTime: " + supplyTime);
-        System.out.println("usedQuantity: " + usedQuantity);
-        System.out.println("\n");
+//        System.out.println("recalculate():");
+//        System.out.println("barcode: " + barcode);
+//        System.out.println("saleTime: " + saleTime);
+//        System.out.println("supplyTime: " + supplyTime);
+//        System.out.println("usedQuantity: " + usedQuantity);
+//        System.out.println("\n");
 
         List<Sale> sales = saleDao.getSalesFromTime(barcode, saleTime);
         List<Supply> supplies = supplyDao.getSuppliesFromTime(barcode, supplyTime);

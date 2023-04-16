@@ -18,9 +18,9 @@ public class SuppliesController {
     @Autowired
     private SupplyService supplyService;
     @GetMapping
-    private List<SupplyDto> getSuppliesList(@RequestParam(value = "barcode", required = true) BigInteger barcode,
-                                         @RequestParam(value = "fromTime", required = true) String fromTime,
-                                         @RequestParam(value = "toTime", required = true) String toTime) {
+    private List<SupplyDto> getSuppliesList(@RequestParam(value = "barcode", required = false) BigInteger barcode,
+                                         @RequestParam(value = "fromTime", required = false) String fromTime,
+                                         @RequestParam(value = "toTime", required = false) String toTime) {
         return supplyService.getSuppliesByPeriod(barcode, fromTime, toTime);
     }
 
@@ -36,7 +36,7 @@ public class SuppliesController {
         return createResponse;
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     private void editSupply(@PathVariable("id") Long id,
                           @RequestBody SupplyDto supplyDto) {
         supplyDto.setId(id);
