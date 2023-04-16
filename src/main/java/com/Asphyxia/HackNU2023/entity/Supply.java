@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "supply", schema = "umag_hacknu")
+@Table(name = "supply", schema = "umag_hacknu", indexes = @Index(name = "supply_indx", columnList = "barcode, supply_time"))
 public class Supply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "barcode_cursor")
+@Table(name = "barcode_cursor", indexes = @Index(name = "bc_index", columnList = "barcode, supplyTime"))
 public class BarcodeCursor {
 
     @Id
